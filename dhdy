@@ -1,0 +1,32 @@
+mousePressEvent (self,  event) - 鼠标键按下时调用;
+mouseReleaseEvent (self, event) - 鼠标键公开时调用;
+mouseDoubieCiickEvent (self, event) - 双击鼠标时调用。必须注意，在双击之前的其他事件。双击时的事件顺序如下:
+MouseButtonPress
+MouseButtonRelease
+MouseButtonDblClick
+MouseButtonPress
+MouseButtonRelease
+QApplicaption类的setDoubleClickInterval( )方法可设置双击的时间间隔；doubleClickInterval( )方法返回双击的时间间隔。
+    event参数是QMouseEvent对象，存储事件的其他信息。有以下方法：
+
+x() 和 y() -返回相对于控件空间的鼠标坐标值;
+pos() - 返回相对于控件空间的QPoint对象;
+localPos()- 返回相对于控件空间的QPointF对象;
+globalX() 和 globalY() -  返回相对于屏幕的x,y 坐标值；
+globalPos() - 返回相对于屏幕的QPoint对象;
+windowPos() -  返回相对于窗口的QPointF对象; 
+screenPos() - 返回相对于屏幕的QPointF对象; 
+button() - 返回以下枚举值(只列了部分，详细内容参见 https://doc.qt.io/qt-5/qt.html#MouseButton-enum，用以判断是哪个鼠标健触发了事件。
+QtCore.Qt.NoButton - 0 - 没有按下鼠标键。例如移动鼠标时的button()返回值；
+QtCore.Qt.LeftButton -1 -按下鼠标左键；
+QtCore.Qt.RightButton -2 -按下鼠标右键；
+QtCore.Qt.Mion 或 QtCore.Qt.MiddleButton -4 -按下鼠标中键；
+buttons() - 返回前面所列枚举值的组合，用于判断同时按下了哪些键。
+modifiers() - 判断按下了哪些修饰键（Shift,Ctrl , Alt,等等）,详见键盘事件(18)中的modifiers()。
+timestamp() - 返回事件发生的时间；
+    如果要让父控件继续收到鼠标事件，要调用事件的ignore()方法；否则，调用accept()。
+
+    如果一个控件的QtCore.Qt.WA_NoMousePropagation的属性设为True,则不会将事件传递给父控件。调用setAttribute( )方法可修改此参数：
+    button.setAttribute (QtCore.Qt.WA_NoMousePropagation, True)
+
+    缺省情况下，鼠标事件只拦截控件区域上的鼠标操作。如果可拦截控件区域以下的鼠标事件，必须调用grabMouse( )方法；释放时，调用releaseMouse( )。
