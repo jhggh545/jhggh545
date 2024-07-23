@@ -1,0 +1,41 @@
+import book.BookList;
+import user.DomesticConsumer;
+import user.Manager;
+import user.User;
+
+import java.util.Scanner;
+
+public class Main {
+    public static User login(){
+        Scanner scan = new Scanner(System.in);
+        System.out.println("请输入你的姓名：");
+        String name = scan.nextLine();
+
+        System.out.println("1.管理员   2.普通用户");
+        System.out.println("请输入你的身份：");
+        int identity = scan.nextInt();
+
+        if(identity == 1){
+            return new Manager(name);
+        }else{
+            return new DomesticConsumer(name);
+        }
+    }
+
+    public static void main(String[] args) {
+        //创建书架
+        BookList bookList = new BookList();
+
+        //login
+        User user = login();
+
+        while(true){
+
+            //功能菜单选择
+            int choice = user.menu();
+
+            //功能实现
+            user.work(choice,bookList);
+        }
+    }
+}
